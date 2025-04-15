@@ -38,5 +38,3 @@ Mi especialidad es el desarrollo y modernización de aplicaciones usando **.NET 
 📍 Disponible para trabajo **freelance remoto o híbrido** desde Chile
 
 ---
-
-> 🧠 “Siempre estoy en busca de nuevos desafíos que me permitan crecer profesionalmente y aportar con soluciones de alto impacto.”
