@@ -15,34 +15,12 @@
   <!-- jQuery CDN -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-  $(document).ready(function () {
-    let clickCountHabilidades = 1;
-    let clickCountStack = 1;
-    let clickCountPortafolio = 1;
-    const originalHabilidadesHtml = $("#habilidades-lista").html();
-    const originalStackHtml = $("#stack-lista").html();
-    const originalPortafolioHtml = $("#portafolio-lista").html();
-    const originalInicioHtml = $("#inicio-lista").html();
+  $(document).ready(function () {    
+    let clickCount = 1;    
+    const originalHtml = $("#inicio-lista").html();
 
-    if (clickCountHabilidades === 1) {
-	clickCountHabilidades++;
-        const textContent = $("#habilidades-lista").text();
-        const lines = originalHabilidadesHtml.match(/<li>.*?<\/li>/g) || [];
-        $("#habilidades-lista").html("").show();
-
-        // Simular el efecto de tipeo línea por línea
-        let i = 0;
-        function typeLine() {
-          if (i < lines.length) {
-            $("<li></li>").html(lines[i].replace(/<\/?li>/g, "")).appendTo("#habilidades-lista");
-            i++;
-            setTimeout(typeLine, 150); // Velocidad de tipeo
-          }
-        }
-        typeLine();
-	    
-    }  
-
+    
+/*
     if (clickCountStack === 1) {
         clickCountStack++;
 	const textContent = $("#stack-lista").text();
@@ -61,11 +39,12 @@
         typeLine();
 
     }
+    */
 
-    if (clickCountPortafolio === 1) {
-        clickCountPortafolio++;
+    if (clickCount === 1) {
+        clickCount++;
 	const textContent = $("#inicio-lista").text();
-        const lines = originalInicioHtml.match(/<p>.*?<\/p>/g) || [];
+        const lines = originalHtml.match(/<p>.*?<\/p>/g) || [];
         $("#inicio-lista").html("").show();
 
         // Simular el efecto de tipeo línea por línea
@@ -80,25 +59,6 @@
         typeLine();
 
     }
-
-    if (clickCountPortafolio === 1) {
-        clickCountPortafolio++;
-	const textContent = $("#portafolio-lista").text();
-        const lines = originalPortafolioHtml.match(/<li>.*?<\/li>/g) || [];
-        $("#portafolio-lista").html("").show();
-
-        // Simular el efecto de tipeo línea por línea
-        let i = 0;
-        function typeLine() {
-          if (i < lines.length) {
-            $("<li></li>").html(lines[i].replace(/<\/?li>/g, "")).appendTo("#portafolio-lista");
-            i++;
-            setTimeout(typeLine, 150); // Velocidad de tipeo
-          }
-        }
-        typeLine();
-
-    }	  
 
     $("#toggle-habilidades").click(function () {
       $("#habilidades-lista").slideToggle();
