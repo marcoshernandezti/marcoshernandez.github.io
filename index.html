@@ -11,6 +11,11 @@
     a { color: #2980b9; text-decoration: none; }
     a:hover { text-decoration: underline; }
     hr { margin: 30px 0; }
+  .icono {
+  font-size: 0.8em;
+  margin-left: 10px;
+  transition: transform 0.2s;
+   }
   </style>
   <!-- jQuery CDN -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -19,57 +24,38 @@
     let clickCount = 1;    
     const originalHtml = $("#inicio-lista").html();
 
-    
-/*
-    if (clickCountStack === 1) {
-        clickCountStack++;
-	const textContent = $("#stack-lista").text();
-        const lines = originalStackHtml.match(/<li>.*?<\/li>/g) || [];
-        $("#stack-lista").html("").show();
-
-        // Simular el efecto de tipeo línea por línea
-        let i = 0;
-        function typeLine() {
-          if (i < lines.length) {
-            $("<li></li>").html(lines[i].replace(/<\/?li>/g, "")).appendTo("#stack-lista");
-            i++;
-            setTimeout(typeLine, 150); // Velocidad de tipeo
-          }
-        }
-        typeLine();
-
-    }
-    */
-
     if (clickCount === 1) {
-        clickCount++;
-	const textContent = $("#inicio-lista").text();
-        const lines = originalHtml.match(/<p>.*?<\/p>/g) || [];
-        $("#inicio-lista").html("").show();
+	  clickCount++;
+	  const originalText = $("#inicio-lista").html();
+	  $("#inicio-lista").html("").show();
+	
+	  let i = 0;
+	  function typeCharacter() {
+	    if (i < originalText.length) {
+	      $("#inicio-lista").html((_, html) => html + originalText.charAt(i));
+	      i++;
+	      setTimeout(typeCharacter, 15); // velocidad del efecto
+	    }
+	  }
+	  typeCharacter();
+	}
 
-        // Simular el efecto de tipeo línea por línea
-        let i = 0;
-        function typeLine() {
-          if (i < lines.length) {
-            $("<p></p>").html(lines[i].replace(/<\/?p>/g, "")).appendTo("#inicio-lista");
-            i++;
-            setTimeout(typeLine, 150); // Velocidad de tipeo
-          }
-        }
-        typeLine();
-
+    function toggleSeccion(selectorLista, selectorTitulo) {
+	  $(selectorLista).slideToggle();
+	  const icono = $(selectorTitulo).find(".icono");
+	  icono.text(icono.text() === "▼" ? "▲" : "▼");
     }
-
-    $("#toggle-habilidades").click(function () {
-      $("#habilidades-lista").slideToggle();
+	  
+    $("#toggle-habilidades").click(function () {      
+      toggleSeccion("#habilidades-lista", "#toggle-habilidades");
     });
 
     $("#toggle-stack").click(function () {
-      $("#stack-lista").slideToggle();      
+      toggleSeccion("#stack-lista", "#toggle-stack");      
     });
 	  
     $("#toggle-portafolio").click(function () {
-      $("#portafolio-lista").slideToggle();      
+      toggleSeccion("#portafolio-lista", "#toggle-portafolio");     
     });
     
   });
@@ -86,7 +72,7 @@
 
  <hr>
 
-  <h2 id="toggle-habilidades">🚀 ¿Qué puedo hacer por ti?</h2>
+  <h2 id="toggle-habilidades">🚀 ¿Qué puedo hacer por ti? <span class="icono">▼</span></h2>
   <ul id="habilidades-lista" style="display: none;">
     <li>🔄 Migración de aplicaciones <strong>ASP.NET a .NET Core / .NET 8</strong></li>
     <li>🧱 Refactorización de código legacy y adopción de <strong>Entity Framework Core</strong></li>
@@ -99,7 +85,7 @@
 
   <hr>
 
-  <h2 id="toggle-stack">⚙️ Stack Técnico Actualizado</h2>
+  <h2 id="toggle-stack">⚙️ Stack Técnico Actualizado <span class="icono">▼</span></h2>
   <ul id="stack-lista" style="display: none;">
     <li><strong>Lenguajes:</strong> C#, T-SQL, JavaScript, Python (básico), Node.js (básico)</li>
     <li><strong>Frameworks:</strong> .NET Core, .NET 8, ASP.NET MVC, Blazor, Bootstrap, React (básico)</li>
@@ -115,7 +101,7 @@
 
   <hr>
 
-  <h2 id="toggle-portafolio">📁 Portafolio personales en desarrollo:</h2>
+  <h2 id="toggle-portafolio">📁 Portafolio personales en desarrollo: <span class="icono">▼</span></h2>
   <ul id="portafolio-lista" style="display: none;">
     <li>
       <strong>Sistema de Gestión de Comunas</strong>  
