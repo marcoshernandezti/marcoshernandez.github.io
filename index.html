@@ -23,10 +23,8 @@
     const originalStackHtml = $("#stack-lista").html();
     const originalPortafolioHtml = $("#portafolio-lista").html();
 
-    $("#toggle-habilidades").click(function () {
-      clickCountHabilidades++;
-
-      if (clickCountHabilidades === 1) {
+    if (clickCountHabilidades === 1) {
+	clickCountHabilidades++;
         const textContent = $("#habilidades-lista").text();
         const lines = originalHabilidadesHtml.match(/<li>.*?<\/li>/g) || [];
         $("#habilidades-lista").html("").show();
@@ -41,17 +39,12 @@
           }
         }
         typeLine();
+	    
+    }  
 
-      } else {
-	$("#habilidades-lista").slideToggle();
-      }
-    });
-
-    $("#toggle-stack").click(function () {
-      clickCountStack++;
-
-      if (clickCountStack === 1) {
-        const textContent = $("#stack-lista").text();
+    if (clickCountStack === 1) {
+        clickCountStack++;
+	const textContent = $("#stack-lista").text();
         const lines = originalStackHtml.match(/<li>.*?<\/li>/g) || [];
         $("#stack-lista").html("").show();
 
@@ -66,16 +59,11 @@
         }
         typeLine();
 
-      } else {
-	$("#stack-lista").slideToggle();
-      }
-    });
-	  
-    $("#toggle-portafolio").click(function () {
-      clickCountPortafolio++;
+    }
 
-      if (clickCountPortafolio === 1) {
-        const textContent = $("#portafolio-lista").text();
+    if (clickCountPortafolio === 1) {
+        clickCountPortafolio++;
+	const textContent = $("#portafolio-lista").text();
         const lines = originalPortafolioHtml.match(/<li>.*?<\/li>/g) || [];
         $("#portafolio-lista").html("").show();
 
@@ -90,9 +78,18 @@
         }
         typeLine();
 
-      } else {
-	$("#portafolio-lista").slideToggle();
-      }
+    }
+
+    $("#toggle-habilidades").click(function () {
+      $("#habilidades-lista").slideToggle();
+    });
+
+    $("#toggle-stack").click(function () {
+      $("#stack-lista").slideToggle();      
+    });
+	  
+    $("#toggle-portafolio").click(function () {
+      $("#portafolio-lista").slideToggle();      
     });
     
   });
@@ -138,7 +135,7 @@
   <hr>
 
   <h2 id="toggle-Portafolio">📁 Portafolio personales en desarrollo:</h2>
-  <ul id="Portafolio-lista" style="display: none;">
+  <ul id="portafolio-lista" style="display: none;">
     <li>
       <strong>Sistema de Gestión de Comunas</strong>  
       (<a href="https://github.com/marcoshernandezti/ProyectoComunas" target="_blank">ver repositorio</a>):  
