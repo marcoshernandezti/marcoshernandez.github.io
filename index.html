@@ -16,9 +16,9 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
   $(document).ready(function () {
-    let clickCountHabilidades = 0;
-    let clickCountStack = 0;
-    let clickCountPortafolio = 0;
+    let clickCountHabilidades = 1;
+    let clickCountStack = 1;
+    let clickCountPortafolio = 1;
     const originalHabilidadesHtml = $("#habilidades-lista").html();
     const originalStackHtml = $("#stack-lista").html();
     const originalPortafolioHtml = $("#portafolio-lista").html();
@@ -42,11 +42,8 @@
         }
         typeLine();
 
-      } else if (clickCountHabilidades === 2) {
-        $("#habilidades-lista").slideUp();
-
       } else {
-        $("#habilidades-lista").html(originalHabilidadesHtml).slideDown();
+	$("#habilidades-lista").slideToggle();
       }
     });
 
@@ -69,11 +66,8 @@
         }
         typeLine();
 
-      } else if (clickCountStack === 2) {
-        $("#stack-lista").slideUp();
-
       } else {
-        $("#stack-lista").html(originalStackHtml).slideDown();
+	$("#stack-lista").slideToggle();
       }
     });
 	  
@@ -96,11 +90,8 @@
         }
         typeLine();
 
-      } else if (clickCountPortafolio === 2) {
-        $("#portafolio-lista").slideUp();
-
       } else {
-        $("#portafolio-lista").html(originalPortafolioHtml).slideDown();
+	$("#portafolio-lista").slideToggle();
       }
     });
     
