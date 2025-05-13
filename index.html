@@ -11,11 +11,20 @@
     a { color: #2980b9; text-decoration: none; }
     a:hover { text-decoration: underline; }
     hr { margin: 30px 0; }
-  .icono {
-  font-size: 0.8em;
-  margin-left: 10px;
-  transition: transform 0.2s;
-   }
+    .icono {
+      font-size: 0.8em;
+      margin-left: 10px;
+      transition: transform 0.2s;
+    }
+    /* Añadimos un cursor parpadeante para el efecto de escritura */
+    .typing-effect::after {
+      content: '|';
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      from, to { opacity: 1; }
+      50% { opacity: 0; }
+    }
   </style>
   <!-- jQuery CDN -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -23,7 +32,8 @@
   $(document).ready(function () {    
     let clickCount = 1;    
     const originalHtml = $("#inicio-lista").html();
-
+    
+    // Efecto de escritura corregido
     if (clickCount === 1) {
       clickCount++;
       
@@ -40,72 +50,56 @@
       let currentNode = document.createElement('div');
       currentNode.innerHTML = originalContent;
       
-      // Función recursiva para procesar el HTML de manera segura
-      function processNode(node) {
+      // Procesar el contenido original
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = originalContent;
+      
+      function extractStructure(node, formats = {}) {
+        let result = [];
+        
         if (node.nodeType === Node.TEXT_NODE) {
-          // Si es un nodo de texto, lo añadimos a la lista
-          textNodes.push({
-            text: node.textContent,
-            parent: node.parentNode.nodeName,
-            format: {}
-          });
+          const text = node.textContent;
+          for (let i = 0; i < text.length; i++) {
+            result.push({
+              char: text[i],
+              ...formats
+            });
+          }
         } else if (node.nodeType === Node.ELEMENT_NODE) {
-          // Si es un elemento, procesamos sus hijos
-          const format = {};
+          // Copiar formatos existentes y añadir nuevos según la etiqueta
+          const newFormats = {...formats};
           
-          // Determinar el formato según la etiqueta
           if (node.nodeName === 'STRONG') {
-            format.strong = true;
-          } else if (node.nodeName === 'P') {
-            format.paragraph = true;
+            newFormats.strong = true;
           }
           
-          // Procesar nodos hijos
+          // Manejar párrafos como etiquetas especiales
+          if (node.nodeName === 'P') {
+            result.push({ char: '<p>', isTag: true });
+          }
+          
+          // Procesar todos los nodos hijos
           for (let i = 0; i < node.childNodes.length; i++) {
-            const childNode = node.childNodes[i];
-            
-            if (childNode.nodeType === Node.TEXT_NODE) {
-              textNodes.push({
-                text: childNode.textContent,
-                parent: node.nodeName,
-                format: {...format}
-              });
-            } else {
-              processNode(childNode);
-            }
+            result = result.concat(extractStructure(node.childNodes[i], newFormats));
+          }
+          
+          // Cerrar párrafos
+          if (node.nodeName === 'P') {
+            result.push({ char: '</p>', isTag: true });
           }
         }
+        
+        return result;
       }
       
-      // Procesar el contenido original
-      processNode(currentNode);
-      
-      // Convertir los nodos procesados a una secuencia de caracteres con formato
-      const characters = [];
-      textNodes.forEach(node => {
-        let currentFormat = node.format;
-        let chars = node.text.split('');
-        
-        if (currentFormat.paragraph && characters.length > 0) {
-          characters.push({ char: '<p>', isTag: true });
-        }
-        
-        chars.forEach(char => {
-          if (currentFormat.strong) {
-            characters.push({ char: char, strong: true });
-          } else {
-            characters.push({ char: char });
-          }
-        });
-        
-        if (currentFormat.paragraph) {
-          characters.push({ char: '</p>', isTag: true });
-        }
-      });
+      // Extraer la estructura de caracteres con sus formatos
+      const characters = extractStructure(tempDiv);
       
       // Función para escribir los caracteres uno por uno
       let currentHTML = '';
       let inStrongTag = false;
+      let strongBuffer = [];
+      let currentTextNode = '';
       
       function typeNextCharacter() {
         if (index < characters.length) {
@@ -113,19 +107,29 @@
           
           if (charObj.isTag) {
             // Si es una etiqueta HTML, la añadimos directamente
-            currentHTML += charObj.char;
-          } else {
-            // Gestionar etiquetas strong
-            if (charObj.strong && !inStrongTag) {
-              currentHTML += '<strong>';
-              inStrongTag = true;
-            } else if (!charObj.strong && inStrongTag) {
-              currentHTML += '</strong>';
+            if (inStrongTag) {
+              // Si estamos en un strong tag y viene una etiqueta, cerramos y volvemos a abrir después
+              currentHTML += '<strong>' + strongBuffer.join('') + '</strong>';
+              strongBuffer = [];
               inStrongTag = false;
             }
-            
-            // Añadir el carácter
             currentHTML += charObj.char;
+          } else {
+            // Manejar caracteres con formato strong
+            if (charObj.strong) {
+              // Si es strong, lo añadimos al buffer
+              strongBuffer.push(charObj.char);
+              inStrongTag = true;
+            } else {
+              // Si no es strong y hay contenido en el buffer, cerramos la etiqueta
+              if (inStrongTag) {
+                currentHTML += '<strong>' + strongBuffer.join('') + '</strong>';
+                strongBuffer = [];
+                inStrongTag = false;
+              }
+              // Añadir el carácter normal
+              currentHTML += charObj.char;
+            }
           }
           
           $typingContainer.html(currentHTML);
@@ -136,8 +140,9 @@
           $typingContainer.removeClass('typing-effect');
           
           // Aseguramos que se cierre cualquier etiqueta abierta
-          if (inStrongTag) {
-            $typingContainer.html(currentHTML + '</strong>');
+          if (inStrongTag && strongBuffer.length > 0) {
+            currentHTML += '<strong>' + strongBuffer.join('') + '</strong>';
+            $typingContainer.html(currentHTML);
           }
         }
       }
@@ -147,11 +152,11 @@
     }
 
     function toggleSeccion(selectorLista, selectorTitulo) {
-	  $(selectorLista).slideToggle();
-	  const icono = $(selectorTitulo).find(".icono");
-	  icono.text(icono.text() === "▼" ? "▲" : "▼");
+      $(selectorLista).slideToggle();
+      const icono = $(selectorTitulo).find(".icono");
+      icono.text(icono.text() === "▼" ? "▲" : "▼");
     }
-	  
+      
     $("#toggle-habilidades").click(function () {      
       toggleSeccion("#habilidades-lista", "#toggle-habilidades");
     });
@@ -159,7 +164,7 @@
     $("#toggle-stack").click(function () {
       toggleSeccion("#stack-lista", "#toggle-stack");      
     });
-	  
+      
     $("#toggle-portafolio").click(function () {
       toggleSeccion("#portafolio-lista", "#toggle-portafolio");     
     });
@@ -170,13 +175,13 @@
 <body>
 
   <h1>Marcos Hernández | Desarrollador .NET Senior</h1>
-	
+    
   <div id="inicio-lista">
-	<p>👋 ¡Hola! Soy <strong>Ingeniero en Informática</strong> con más de 5 años de experiencia en desarrollo backend con tecnologías <strong>.NET</strong>, y actualmente me encuentro en transición hacia el mundo <strong>cloud y full stack</strong>.</p>
-	<p>Estoy ampliando mi stack con <strong>Node.js</strong> y <strong>React</strong>, y he trabajado con <strong>Google Cloud Platform</strong> desarrollando funciones serverless con Python, integradas a backend Java y desplegadas en entornos controlados. Mi enfoque combina experiencia backend, visión técnica, análisis funcional y una fuerte orientación a la evolución tecnológica continua.</p>	  
+    <p>👋 ¡Hola! Soy <strong>Ingeniero en Informática</strong> con más de 5 años de experiencia en desarrollo backend con tecnologías <strong>.NET</strong>, y actualmente me encuentro en transición hacia el mundo <strong>cloud y full stack</strong>.</p>
+    <p>Estoy ampliando mi stack con <strong>Node.js</strong> y <strong>React</strong>, y he trabajado con <strong>Google Cloud Platform</strong> desarrollando funciones serverless con Python, integradas a backend Java y desplegadas en entornos controlados. Mi enfoque combina experiencia backend, visión técnica, análisis funcional y una fuerte orientación a la evolución tecnológica continua.</p>    
   </div>  
 
- <hr>
+  <hr>
 
   <h2 id="toggle-habilidades">🚀 ¿Qué puedo hacer por ti? <span class="icono">▼</span></h2>
   <ul id="habilidades-lista" style="display: none;">
@@ -223,7 +228,7 @@
 
   <p>🔗 <a href="https://github.com/marcoshernandezti">github.com/marcoshernandezti</a></p>
 
-   <hr>
+  <hr>
 
   <h2>📫 Contacto</h2>
   <ul>
