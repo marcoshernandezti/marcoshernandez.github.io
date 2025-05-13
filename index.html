@@ -25,20 +25,126 @@
     const originalHtml = $("#inicio-lista").html();
 
     if (clickCount === 1) {
-	  clickCount++;
-	  const originalText = $("#inicio-lista").html();
-	  $("#inicio-lista").html("").show();
-	
-	  let i = 0;
-	  function typeCharacter() {
-	    if (i < originalText.length) {
-	      $("#inicio-lista").html((_, html) => html + originalText.charAt(i));
-	      i++;
-	      setTimeout(typeCharacter, 15); // velocidad del efecto
-	    }
-	  }
-	  typeCharacter();
-	}
+      clickCount++;
+      
+      // Guardamos el contenido HTML original
+      const $inicioLista = $("#inicio-lista");
+      const originalContent = $inicioLista.html();
+      
+      // Creamos un contenedor temporal para el efecto de escritura
+      $inicioLista.empty().append('<div class="typing-effect"></div>');
+      const $typingContainer = $inicioLista.find('.typing-effect');
+      
+      let index = 0;
+      const textNodes = [];
+      let currentNode = document.createElement('div');
+      currentNode.innerHTML = originalContent;
+      
+      // Función recursiva para procesar el HTML de manera segura
+      function processNode(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          // Si es un nodo de texto, lo añadimos a la lista
+          textNodes.push({
+            text: node.textContent,
+            parent: node.parentNode.nodeName,
+            format: {}
+          });
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          // Si es un elemento, procesamos sus hijos
+          const format = {};
+          
+          // Determinar el formato según la etiqueta
+          if (node.nodeName === 'STRONG') {
+            format.strong = true;
+          } else if (node.nodeName === 'P') {
+            format.paragraph = true;
+          }
+          
+          // Procesar nodos hijos
+          for (let i = 0; i < node.childNodes.length; i++) {
+            const childNode = node.childNodes[i];
+            
+            if (childNode.nodeType === Node.TEXT_NODE) {
+              textNodes.push({
+                text: childNode.textContent,
+                parent: node.nodeName,
+                format: {...format}
+              });
+            } else {
+              processNode(childNode);
+            }
+          }
+        }
+      }
+      
+      // Procesar el contenido original
+      processNode(currentNode);
+      
+      // Convertir los nodos procesados a una secuencia de caracteres con formato
+      const characters = [];
+      textNodes.forEach(node => {
+        let currentFormat = node.format;
+        let chars = node.text.split('');
+        
+        if (currentFormat.paragraph && characters.length > 0) {
+          characters.push({ char: '<p>', isTag: true });
+        }
+        
+        chars.forEach(char => {
+          if (currentFormat.strong) {
+            characters.push({ char: char, strong: true });
+          } else {
+            characters.push({ char: char });
+          }
+        });
+        
+        if (currentFormat.paragraph) {
+          characters.push({ char: '</p>', isTag: true });
+        }
+      });
+      
+      // Función para escribir los caracteres uno por uno
+      let currentHTML = '';
+      let inStrongTag = false;
+      
+      function typeNextCharacter() {
+        if (index < characters.length) {
+          const charObj = characters[index];
+          
+          if (charObj.isTag) {
+            // Si es una etiqueta HTML, la añadimos directamente
+            currentHTML += charObj.char;
+          } else {
+            // Gestionar etiquetas strong
+            if (charObj.strong && !inStrongTag) {
+              currentHTML += '<strong>';
+              inStrongTag = true;
+            } else if (!charObj.strong && inStrongTag) {
+              currentHTML += '</strong>';
+              inStrongTag = false;
+            }
+            
+            // Añadir el carácter
+            currentHTML += charObj.char;
+          }
+          
+          $typingContainer.html(currentHTML);
+          index++;
+          setTimeout(typeNextCharacter, 15);
+        } else {
+          // Cuando termine, removemos la clase typing-effect
+          $typingContainer.removeClass('typing-effect');
+          
+          // Aseguramos que se cierre cualquier etiqueta abierta
+          if (inStrongTag) {
+            $typingContainer.html(currentHTML + '</strong>');
+          }
+        }
+      }
+      
+      // Iniciar el efecto de escritura
+      setTimeout(typeNextCharacter, 500);
+    }
 
     function toggleSeccion(selectorLista, selectorTitulo) {
 	  $(selectorLista).slideToggle();
