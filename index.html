@@ -15,12 +15,97 @@
   <!-- jQuery CDN -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $("#toggle-habilidades").click(function () {
-        $("#habilidades-lista").slideToggle();
-      });
+  $(document).ready(function () {
+    let clickCountHabilidades = 0;
+    let clickCountStack = 0;
+    let clickCountPortafolio = 0;
+    const originalHabilidadesHtml = $("#habilidades-lista").html();
+    const originalStackHtml = $("#stack-lista").html();
+    const originalPortafolioHtml = $("#portafolio-lista").html();
+
+    $("#toggle-habilidades").click(function () {
+      clickCountHabilidades++;
+
+      if (clickCountHabilidades === 1) {
+        const textContent = $("#habilidades-lista").text();
+        const lines = originalHabilidadesHtml.match(/<li>.*?<\/li>/g) || [];
+        $("#habilidades-lista").html("").show();
+
+        // Simular el efecto de tipeo línea por línea
+        let i = 0;
+        function typeLine() {
+          if (i < lines.length) {
+            $("<li></li>").html(lines[i].replace(/<\/?li>/g, "")).appendTo("#habilidades-lista");
+            i++;
+            setTimeout(typeLine, 150); // Velocidad de tipeo
+          }
+        }
+        typeLine();
+
+      } else if (clickCountHabilidades === 2) {
+        $("#habilidades-lista").slideUp();
+
+      } else {
+        $("#habilidades-lista").html(originalHabilidadesHtml).slideDown();
+      }
     });
-  </script>
+
+    $("#toggle-stack").click(function () {
+      clickCountStack++;
+
+      if (clickCountStack === 1) {
+        const textContent = $("#stack-lista").text();
+        const lines = originalStackHtml.match(/<li>.*?<\/li>/g) || [];
+        $("#stack-lista").html("").show();
+
+        // Simular el efecto de tipeo línea por línea
+        let i = 0;
+        function typeLine() {
+          if (i < lines.length) {
+            $("<li></li>").html(lines[i].replace(/<\/?li>/g, "")).appendTo("#stack-lista");
+            i++;
+            setTimeout(typeLine, 150); // Velocidad de tipeo
+          }
+        }
+        typeLine();
+
+      } else if (clickCountStack === 2) {
+        $("#stack-lista").slideUp();
+
+      } else {
+        $("#stack-lista").html(originalStackHtml).slideDown();
+      }
+    });
+	
+	$("#toggle-portafolio").click(function () {
+      clickCountPortafolio++;
+
+      if (clickCountPortafolio === 1) {
+        const textContent = $("#portafolio-lista").text();
+        const lines = originalPortafolioHtml.match(/<li>.*?<\/li>/g) || [];
+        $("#portafolio-lista").html("").show();
+
+        // Simular el efecto de tipeo línea por línea
+        let i = 0;
+        function typeLine() {
+          if (i < lines.length) {
+            $("<li></li>").html(lines[i].replace(/<\/?li>/g, "")).appendTo("#portafolio-lista");
+            i++;
+            setTimeout(typeLine, 150); // Velocidad de tipeo
+          }
+        }
+        typeLine();
+
+      } else if (clickCountPortafolio === 2) {
+        $("#portafolio-lista").slideUp();
+
+      } else {
+        $("#portafolio-lista").html(originalPortafolioHtml).slideDown();
+      }
+    });
+    
+  });
+</script>
 </head>
 <body>
 
@@ -45,8 +130,8 @@
 
   <hr>
 
-  <h2>⚙️ Stack Técnico Actualizado</h2>
-  <ul>
+  <h2 id="toggle-stack">⚙️ Stack Técnico Actualizado</h2>
+  <ul id="stack-lista" style="display: none;">
     <li><strong>Lenguajes:</strong> C#, T-SQL, JavaScript, Python (básico), Node.js (básico)</li>
     <li><strong>Frameworks:</strong> .NET Core, .NET 8, ASP.NET MVC, Blazor, Bootstrap, React (básico)</li>
     <li><strong>ORM:</strong> Entity Framework Core, ADO.NET, LINQ</li>
@@ -61,8 +146,8 @@
 
   <hr>
 
-  <h2>📁 Portafolio personales en desarrollo:</h2>
-  <ul>
+  <h2 id="toggle-Portafolio">📁 Portafolio personales en desarrollo:</h2>
+  <ul id="Portafolio-lista" style="display: none;">
     <li>
       <strong>Sistema de Gestión de Comunas</strong>  
       (<a href="https://github.com/marcoshernandezti/ProyectoComunas" target="_blank">ver repositorio</a>):  
