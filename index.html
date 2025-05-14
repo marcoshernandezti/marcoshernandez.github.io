@@ -1,241 +1,108 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Marcos Hernández | Desarrollador .NET Senior</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Marcos Hernández – Portafolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: auto; padding: 20px; }
-    h1, h2 { color: #2c3e50; cursor: pointer; }
-    ul { margin-left: 20px; }
-    a { color: #2980b9; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    hr { margin: 30px 0; }
-    .icono {
-      font-size: 0.8em;
-      margin-left: 10px;
-      transition: transform 0.2s;
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
     }
-    /* Añadimos un cursor parpadeante para el efecto de escritura */
-    .typing-effect::after {
-      content: '|';
-      animation: blink 1s step-end infinite;
+    .section {
+      background-color: #ffffff;
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-top: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
-    @keyframes blink {
-      from, to { opacity: 1; }
-      50% { opacity: 0; }
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #0d6efd;
+      display: inline-block;
+      padding-bottom: 0.25rem;
+    }
+    ul li {
+      margin-bottom: 0.5rem;
+    }
+    .badge {
+      font-size: 0.95rem;
+      margin: 0.25rem;
+    }
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #6c757d;
+      text-align: center;
     }
   </style>
-  <!-- jQuery CDN -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-  $(document).ready(function () {    
-    let clickCount = 1;    
-    const originalHtml = $("#inicio-lista").html();
-    
-    // Efecto de escritura corregido
-    if (clickCount === 1) {
-      clickCount++;
-      
-      // Guardamos el contenido HTML original
-      const $inicioLista = $("#inicio-lista");
-      const originalContent = $inicioLista.html();
-      
-      // Creamos un contenedor temporal para el efecto de escritura
-      $inicioLista.empty().append('<div class="typing-effect"></div>');
-      const $typingContainer = $inicioLista.find('.typing-effect');
-      
-      let index = 0;
-      const textNodes = [];
-      let currentNode = document.createElement('div');
-      currentNode.innerHTML = originalContent;
-      
-      // Procesar el contenido original
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = originalContent;
-      
-      function extractStructure(node, formats = {}) {
-        let result = [];
-        
-        if (node.nodeType === Node.TEXT_NODE) {
-          const text = node.textContent;
-          for (let i = 0; i < text.length; i++) {
-            result.push({
-              char: text[i],
-              ...formats
-            });
-          }
-        } else if (node.nodeType === Node.ELEMENT_NODE) {
-          // Copiar formatos existentes y añadir nuevos según la etiqueta
-          const newFormats = {...formats};
-          
-          if (node.nodeName === 'STRONG') {
-            newFormats.strong = true;
-          }
-          
-          // Manejar párrafos como etiquetas especiales
-          if (node.nodeName === 'P') {
-            result.push({ char: '<p>', isTag: true });
-          }
-          
-          // Procesar todos los nodos hijos
-          for (let i = 0; i < node.childNodes.length; i++) {
-            result = result.concat(extractStructure(node.childNodes[i], newFormats));
-          }
-          
-          // Cerrar párrafos
-          if (node.nodeName === 'P') {
-            result.push({ char: '</p>', isTag: true });
-          }
-        }
-        
-        return result;
-      }
-      
-      // Extraer la estructura de caracteres con sus formatos
-      const characters = extractStructure(tempDiv);
-      
-      // Función para escribir los caracteres uno por uno
-      let currentHTML = '';
-      let inStrongTag = false;
-      let strongBuffer = [];
-      let currentTextNode = '';
-      
-      function typeNextCharacter() {
-        if (index < characters.length) {
-          const charObj = characters[index];
-          
-          if (charObj.isTag) {
-            // Si es una etiqueta HTML, la añadimos directamente
-            if (inStrongTag) {
-              // Si estamos en un strong tag y viene una etiqueta, cerramos y volvemos a abrir después
-              currentHTML += '<strong>' + strongBuffer.join('') + '</strong>';
-              strongBuffer = [];
-              inStrongTag = false;
-            }
-            currentHTML += charObj.char;
-          } else {
-            // Manejar caracteres con formato strong
-            if (charObj.strong) {
-              // Si es strong, lo añadimos al buffer
-              strongBuffer.push(charObj.char);
-              inStrongTag = true;
-            } else {
-              // Si no es strong y hay contenido en el buffer, cerramos la etiqueta
-              if (inStrongTag) {
-                currentHTML += '<strong>' + strongBuffer.join('') + '</strong>';
-                strongBuffer = [];
-                inStrongTag = false;
-              }
-              // Añadir el carácter normal
-              currentHTML += charObj.char;
-            }
-          }
-          
-          $typingContainer.html(currentHTML);
-          index++;
-          setTimeout(typeNextCharacter, 15);
-        } else {
-          // Cuando termine, removemos la clase typing-effect
-          $typingContainer.removeClass('typing-effect');
-          
-          // Aseguramos que se cierre cualquier etiqueta abierta
-          if (inStrongTag && strongBuffer.length > 0) {
-            currentHTML += '<strong>' + strongBuffer.join('') + '</strong>';
-            $typingContainer.html(currentHTML);
-          }
-        }
-      }
-      
-      // Iniciar el efecto de escritura
-      setTimeout(typeNextCharacter, 500);
-    }
-
-    function toggleSeccion(selectorLista, selectorTitulo) {
-      $(selectorLista).slideToggle();
-      const icono = $(selectorTitulo).find(".icono");
-      icono.text(icono.text() === "▼" ? "▲" : "▼");
-    }
-      
-    $("#toggle-habilidades").click(function () {      
-      toggleSeccion("#habilidades-lista", "#toggle-habilidades");
-    });
-
-    $("#toggle-stack").click(function () {
-      toggleSeccion("#stack-lista", "#toggle-stack");      
-    });
-      
-    $("#toggle-portafolio").click(function () {
-      toggleSeccion("#portafolio-lista", "#toggle-portafolio");     
-    });
-    
-  });
-</script>
 </head>
 <body>
 
-  <h1>Marcos Hernández | Desarrollador .NET Senior</h1>
-    
-  <div id="inicio-lista">
-    <p>👋 ¡Hola! Soy <strong>Ingeniero en Informática</strong> con más de 5 años de experiencia en desarrollo backend con tecnologías <strong>.NET</strong>, y actualmente me encuentro en transición hacia el mundo <strong>cloud y full stack</strong>.</p>
-    <p>Estoy ampliando mi stack con <strong>Node.js</strong> y <strong>React</strong>, y he trabajado con <strong>Google Cloud Platform</strong> desarrollando funciones serverless con Python, integradas a backend Java y desplegadas en entornos controlados. Mi enfoque combina experiencia backend, visión técnica, análisis funcional y una fuerte orientación a la evolución tecnológica continua.</p>    
-  </div>  
+<div class="container">
+  <!-- Presentación -->
+  <div class="section">
+    <h1 class="text-primary">👋 ¡Hola! Soy Marcos Hernández</h1>
+    <p><strong>Ingeniero en Informática</strong> con <strong>18 años de experiencia</strong> en desarrollo de software, especializado en backend, modernización de sistemas y despliegue en la nube.</p>
 
-  <hr>
+    <p>Durante más de <strong>13 años trabajé con .NET Framework 4.8</strong>, y en los últimos <strong>3+ años he liderado migraciones exitosas a .NET Core</strong>, desde 3.1 hasta .NET 8. También he participado en proyectos con <strong>Java</strong> y <strong>Python (GCP)</strong>.</p>
 
-  <h2 id="toggle-habilidades">🚀 ¿Qué puedo hacer por ti? <span class="icono">▼</span></h2>
-  <ul id="habilidades-lista" style="display: none;">
-    <li>🔄 Migración de aplicaciones <strong>ASP.NET a .NET Core / .NET 8</strong></li>
-    <li>🧱 Refactorización de código legacy y adopción de <strong>Entity Framework Core</strong></li>
-    <li>📡 Desarrollo de <strong>APIs RESTful</strong> seguras, escalables y bien documentadas</li>
-    <li>🧮 Diseño y optimización de <strong>bases de datos</strong> relacionales (SQL Server, PostgreSQL, MySQL, Oracle)</li>
-    <li>🔗 Integración de sistemas con OAuth 2.0, JWT, SOAP y REST</li>
-    <li>🧠 Análisis funcional y técnico de sistemas heredados con propuestas de rediseño</li>
-    <li>🚀 Automatización de despliegues en Azure, CI/CD con GitLab y GitHub Actions</li>
-  </ul>
+    <p>Actualmente estoy aprendiendo <strong>Node.js</strong> y <strong>React</strong> en un proyecto personal, consolidando mi perfil full-stack.</p>
 
-  <hr>
+    <p>Me destaco por mi <strong>pensamiento analítico</strong>, orientación a la mejora continua y compromiso con soluciones eficientes y escalables.</p>
+  </div>
 
-  <h2 id="toggle-stack">⚙️ Stack Técnico Actualizado <span class="icono">▼</span></h2>
-  <ul id="stack-lista" style="display: none;">
-    <li><strong>Lenguajes:</strong> C#, T-SQL, JavaScript, Python (básico), Node.js (básico)</li>
-    <li><strong>Frameworks:</strong> .NET Core, .NET 8, ASP.NET MVC, Blazor, Bootstrap, React (básico)</li>
-    <li><strong>ORM:</strong> Entity Framework Core, ADO.NET, LINQ</li>
-    <li><strong>Bases de datos:</strong> SQL Server, PostgreSQL, Oracle, MySQL</li>
-    <li><strong>DevOps y Cloud:</strong> GitLab CI/CD, GitHub Actions, Docker, Kubernetes, Azure (en formación), GCP (experiencia)</li>
-    <li><strong>Herramientas:</strong> Git, GitHub, GitLab, Visual Studio 2022, VS Code, Postman, JIRA, GitHub Copilot</li>
-    <li><strong>Metodologías:</strong> Scrum, Kanban, Cultura DevOps</li>
-  </ul>
+  <!-- Habilidades -->
+  <div class="section">
+    <h2 class="section-title">🧠 Habilidades</h2>
+    <ul>
+      <li>Liderazgo técnico y mentoría a equipos de desarrollo</li>
+      <li>Migración de sistemas legados a arquitecturas modernas</li>
+      <li>Diseño de APIs RESTful y microservicios</li>
+      <li>Optimización de bases de datos y procedimientos almacenados</li>
+      <li>Integraciones con servicios cloud (GCP, Azure, Apigee)</li>
+    </ul>
+  </div>
 
-  <p>🛠️ Flujo de trabajo con <strong>GitFlow</strong>: <code>feature</code>, <code>develop</code>, <code>release</code>, <code>hotfix</code>, <code>main</code></p>
-  <p>📦 Despliegues controlados en entornos <strong>DEV</strong>, <strong>QA</strong> y <strong>Producción</strong></p>
+  <!-- Stack Tecnológico -->
+  <div class="section">
+    <h2 class="section-title">🛠️ Stack Tecnológico</h2>
+    <div>
+      <span class="badge bg-primary">.NET Framework 4.8</span>
+      <span class="badge bg-primary">.NET Core / .NET 8</span>
+      <span class="badge bg-secondary">Entity Framework</span>
+      <span class="badge bg-secondary">SQL Server</span>
+      <span class="badge bg-success">Java</span>
+      <span class="badge bg-success">Python (GCP)</span>
+      <span class="badge bg-warning text-dark">Node.js</span>
+      <span class="badge bg-warning text-dark">React</span>
+      <span class="badge bg-info text-dark">Bootstrap</span>
+      <span class="badge bg-info text-dark">jQuery</span>
+      <span class="badge bg-dark">Git / GitHub</span>
+    </div>
+  </div>
 
-  <hr>
+  <!-- Portafolio -->
+  <div class="section">
+    <h2 class="section-title">📁 Portafolio</h2>
+    <p>Algunos de mis proyectos destacados (puedes enlazarlos a GitHub o desplegarlos en Pages):</p>
+    <ul>
+      <li><strong>Modernización de ERP Financiero:</strong> Migración desde .NET 4.8 a .NET 6, con mejora del rendimiento en un 40%.</li>
+      <li><strong>Sistema de control de caja (ASP.NET):</strong> Solución completa con subida de archivos, validaciones y generación de reportes en Excel.</li>
+      <li><strong>API bancaria en .NET 8:</strong> Seguridad OAuth2, logging con NLog, y documentación con Swagger.</li>
+      <li><strong>Proyecto personal full-stack:</strong> App de tareas con Node.js, Express, MongoDB y React.</li>
+    </ul>
+  </div>
 
-  <h2 id="toggle-portafolio">📁 Portafolio personales en desarrollo: <span class="icono">▼</span></h2>
-  <ul id="portafolio-lista" style="display: none;">
-    <li>
-      <strong>Sistema de Gestión de Comunas</strong>  
-      (<a href="https://github.com/marcoshernandezti/ProyectoComunas" target="_blank">ver repositorio</a>):  
-      solución en .NET 8 con arquitectura en tres capas (Datos, API REST y Web MVC). Permite listar regiones y comunas de Chile, con funcionalidades para crear y modificar comunas. Utiliza Entity Framework Core y procedimientos almacenados.
-    </li>
-    <li>
-      <strong>Buscador con Paginación desde XML</strong>  
-      (<a href="https://github.com/marcoshernandezti/ProyectoPaginacion" target="_blank">ver repositorio</a>):  
-      aplicación en .NET 8 (próxima a separar en capas) que consume datos desde un archivo XML. Implementa paginación, grilla de resultados y uso de Entity Framework Core. Planea incorporar GitHub Actions para automatizar despliegues.
-    </li>
-  </ul>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Marcos Hernández – Todos los derechos reservados.</p>
+  </footer>
+</div>
 
-  <p>🔗 <a href="https://github.com/marcoshernandezti">github.com/marcoshernandezti</a></p>
-
-  <hr>
-
-  <h2>📫 Contacto</h2>
-  <ul>
-    <li>📧 <strong>Correo:</strong> marcos.hernandez80@email.com</li>
-    <li>💼 <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/marcoshernandezalvarez/">linkedin.com/in/marcoshernandezalvarez</a></li>
-    <li>🌍 <strong>Ubicación:</strong> Santiago, Chile — Disponible para trabajar en modalidad presencial, híbrida o remota</li>
-  </ul>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
