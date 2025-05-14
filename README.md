@@ -8,7 +8,7 @@ Mi enfoque ha estado en el desarrollo de sistemas web, manejo eficiente de datos
 
 ## 🚀 Proyectos Destacados
 
-### 🏙 Sistema de Gestión de Comunas
+### 🏙 Sistema de Gestión de Comunas  
 🔗 [Repositorio](https://github.com/marcoshernandezti/ProyectoComunas)  
 Aplicación desarrollada en .NET 8 con arquitectura en tres capas:  
 - Capa de datos con Entity Framework Core y procedimientos almacenados  
@@ -18,7 +18,7 @@ Permite administrar regiones y comunas de Chile, con formularios para crear, edi
 
 ---
 
-### 📄 Buscador con Paginación desde XML
+### 📄 Buscador con Paginación desde XML  
 🔗 [Repositorio](https://github.com/marcoshernandezti/ProyectoPaginacion)  
 Aplicación que lee datos desde un archivo XML, implementa paginación, grilla de resultados y filtrado.  
 - .NET 8  
@@ -30,13 +30,13 @@ Aplicación que lee datos desde un archivo XML, implementa paginación, grilla d
 
 ## 🛠 Stack Tecnológico
 
-### 👨‍💼 Experto
+### 👨‍💼 Experto  
 `C#`, `VB.NET`, `SQL Server`, `JavaScript`, `JSON`, `Bootstrap`, `jQuery`, `Entity Framework`, `Entity Framework Core`
 
-### 🟡 Medio
+### 🟡 Medio  
 `Java`, `Python`, `Git`, `REST API`, `MVC`
 
-### 🟢 Básico
+### 🟢 Básico  
 `Node.js`, `React`, `Docker`, `Linux`, `Azure`
 
 ---
@@ -47,4 +47,6 @@ Aplicación que lee datos desde un archivo XML, implementa paginación, grilla d
 
 ---
 
-> Este repositorio está pensado como una versión online de mi portafolio, alojado en GitHub Pages, donde puedes explorar más detalles de mi trabajo y experiencia profesional.
+## 🌐 Portafolio Online
+
+🔗 [https://marcoshernandezti.github.io/](https://marcoshernandezti.github.io/)
