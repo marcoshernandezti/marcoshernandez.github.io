@@ -1,6 +1,6 @@
 # 👨‍💻 Marcos Hernández
 
-¡Hola! Soy Marcos Hernández, desarrollador con más de 15 años de experiencia en tecnologías Microsoft (.NET Framework, .NET Core, .NET 8), orientado a soluciones robustas para el sector público y privado.
+¡Hola! Soy Marcos Hernández, desarrollador con más de 18 años de experiencia en tecnologías Microsoft (.NET Framework, .NET Core, .NET 8), orientado a soluciones robustas para el sector público y privado.
 
 Mi enfoque ha estado en el desarrollo de sistemas web, manejo eficiente de datos con SQL Server, y recientemente explorando arquitectura por capas, microservicios y despliegues automatizados.
 
