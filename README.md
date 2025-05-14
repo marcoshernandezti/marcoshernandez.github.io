@@ -1,54 +1,50 @@
-# Marcos Hernández | Desarrollador .NET Senior
+# 👨‍💻 Marcos Hernández
 
-👋 ¡Hola! Soy **Ingeniero en Informática** con más de 5 años de experiencia formal reciente (y más de 18 años en total) desarrollando soluciones empresariales en tecnologías **.NET**.
+¡Hola! Soy Marcos Hernández, desarrollador con más de 15 años de experiencia en tecnologías Microsoft (.NET Framework, .NET Core, .NET 8), orientado a soluciones robustas para el sector público y privado.
 
-Me especializo en desarrollo backend, modernización de sistemas y automatización de procesos, integrando prácticas DevOps y metodologías ágiles. Mi trabajo combina código limpio, visión técnica y enfoque en la eficiencia operativa. Actualmente me estoy proyectando hacia roles de **Desarrollador .NET Senior**, **DevOps Azure Junior** o **Líder Técnico Junior**.
-
----
-
-## 🚀 ¿Qué puedo hacer por ti?
-
-- 🔄 Migración de aplicaciones **ASP.NET a .NET Core / .NET 8**
-- 🧱 Refactorización de código legacy y adopción de **Entity Framework Core**
-- 📡 Desarrollo de **APIs RESTful** seguras, escalables y bien documentadas
-- 🧮 Diseño y optimización de **bases de datos** relacionales (SQL Server, PostgreSQL, MySQL, Oracle)
-- 🔗 Integración de sistemas con OAuth 2.0, JWT, SOAP y REST
-- 🧠 Análisis funcional y técnico de sistemas heredados con propuestas de rediseño
-- 🚀 Automatización de despliegues en Azure, CI/CD con GitLab y GitHub Actions
+Mi enfoque ha estado en el desarrollo de sistemas web, manejo eficiente de datos con SQL Server, y recientemente explorando arquitectura por capas, microservicios y despliegues automatizados.
 
 ---
 
-## ⚙️ Stack Técnico Actualizado
+## 🚀 Proyectos Destacados
 
-- **Lenguajes:** C#, T-SQL, JavaScript, Python (básico), Node.js (básico)
-- **Frameworks:** .NET Core, .NET 8, ASP.NET MVC, Blazor, Bootstrap, React (básico)
-- **ORM y acceso a datos:** Entity Framework Core, ADO.NET, LINQ
-- **Bases de datos:** SQL Server, PostgreSQL, Oracle, MySQL
-- **DevOps y Cloud:** GitLab CI/CD, GitHub Actions, Docker, Kubernetes, Azure (en formación), GCP (experiencia)
-- **Herramientas:** Git, GitHub, GitLab, Visual Studio 2022, VS Code, Postman, JIRA, GitHub Copilot
-- **Metodologías:** Scrum, Kanban, Cultura DevOps
-
-🛠️ Flujo de trabajo con **GitFlow**: `feature`, `develop`, `release`, `hotfix`, `main`  
-📦 Despliegues controlados en entornos **DEV**, **QA** y **Producción**
+### 🏙 Sistema de Gestión de Comunas
+🔗 [Repositorio](https://github.com/marcoshernandezti/ProyectoComunas)  
+Aplicación desarrollada en .NET 8 con arquitectura en tres capas:  
+- Capa de datos con Entity Framework Core y procedimientos almacenados  
+- API RESTful  
+- Frontend en MVC Razor  
+Permite administrar regiones y comunas de Chile, con formularios para crear, editar y listar.
 
 ---
 
-## 📁 Portafolio
+### 📄 Buscador con Paginación desde XML
+🔗 [Repositorio](https://github.com/marcoshernandezti/ProyectoPaginacion)  
+Aplicación que lee datos desde un archivo XML, implementa paginación, grilla de resultados y filtrado.  
+- .NET 8  
+- Entity Framework Core  
+- En proceso de separación en capas  
+- Futuro: incorporar GitHub Actions para despliegues automáticos
 
-Explora los proyectos publicados en este perfil para conocer ejemplos reales de:
+---
 
-- Estructura de soluciones .NET limpias y escalables  
-- Integración de APIs externas  
-- Automatización de flujos con CI/CD  
-- Exportación de datos a Excel/PDF  
-- Modernización de frontends y backends  
+## 🛠 Stack Tecnológico
 
-🔗 [github.com/marcoshernandezti](https://github.com/marcoshernandezti)
+### 👨‍💼 Experto
+`C#`, `VB.NET`, `SQL Server`, `JavaScript`, `JSON`, `Bootstrap`, `jQuery`, `Entity Framework`, `Entity Framework Core`
+
+### 🟡 Medio
+`Java`, `Python`, `Git`, `REST API`, `MVC`
+
+### 🟢 Básico
+`Node.js`, `React`, `Docker`, `Linux`, `Azure`
 
 ---
 
 ## 📫 Contacto
 
-- 📧 **Correo:** marcos.hernandez80@email.com  
-- 💼 **LinkedIn:** [linkedin.com/in/marcoshernandezalvarez](https://www.linkedin.com/in/marcoshernandezalvarez/)  
-- 🌍 Disponible para trabajo **freelance remoto** o en formato **híbrido** desde Chile
+📎 [LinkedIn - marcoshernandezalvarez](https://www.linkedin.com/in/marcoshernandezalvarez/)
+
+---
+
+> Este repositorio está pensado como una versión online de mi portafolio, alojado en GitHub Pages, donde puedes explorar más detalles de mi trabajo y experiencia profesional.
