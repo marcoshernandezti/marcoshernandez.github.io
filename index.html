@@ -58,6 +58,48 @@
     a {
       text-decoration: none;
     }
+
+    /* 🎯 Tipo máquina de escribir */
+    .typewriter h1 {
+      overflow: hidden;
+      border-right: 0.15em solid #0d6efd;
+      white-space: nowrap;
+      margin: 0 auto;
+      letter-spacing: 0.05em;
+      animation:
+        typing 3s steps(30, end),
+        blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #0d6efd }
+    }
+
+    /* 🎨 Colores más suaves para los niveles */
+    .badge-experto {
+      background-color: #004085;
+      color: white;
+    }
+
+    .badge-medio {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .badge-basico {
+      background-color: #ced4da;
+      color: #212529;
+    }
+
+    .stack-title::before {
+      content: '• ';
+    }
   </style>
 </head>
 <body>
@@ -65,7 +107,9 @@
 <div class="container">
   <!-- Presentación -->
   <div class="section">
-    <h1 class="text-primary">👋 ¡Hola! Soy Marcos Hernández</h1>
+    <div class="typewriter">
+      <h1 class="text-primary">👋 ¡Hola! Soy Marcos Hernández</h1>
+    </div>
     <p><strong>Ingeniero en Informática</strong> con <strong>18 años de experiencia</strong> en desarrollo de software, especializado en backend, modernización de sistemas y despliegue en la nube.</p>
 
     <p>Durante más de <strong>13 años trabajé con .NET Framework 4.8</strong>, y en los últimos <strong>3+ años he liderado migraciones exitosas a .NET Core</strong>, desde 3.1 hasta .NET 8. También he participado en proyectos con <strong>Java</strong> y <strong>Python (GCP)</strong>.</p>
@@ -92,29 +136,29 @@
     <h2 class="section-title">🛠️ Stack Tecnológico</h2>
 
     <div class="stack-group">
-      <p class="stack-title text-success">🟢 Experto</p>
-      <span class="badge bg-primary">C#</span>
-      <span class="badge bg-primary">VB.NET</span>
-      <span class="badge bg-primary">SQL</span>
-      <span class="badge bg-primary">JavaScript</span>
-      <span class="badge bg-primary">JSON</span>
-      <span class="badge bg-primary">Bootstrap</span>
-      <span class="badge bg-primary">jQuery</span>
-      <span class="badge bg-primary">Entity Framework</span>
-      <span class="badge bg-primary">Entity Framework Core</span>
+      <p class="stack-title text-primary">Experto</p>
+      <span class="badge badge-experto">C#</span>
+      <span class="badge badge-experto">VB.NET</span>
+      <span class="badge badge-experto">SQL</span>
+      <span class="badge badge-experto">JavaScript</span>
+      <span class="badge badge-experto">JSON</span>
+      <span class="badge badge-experto">Bootstrap</span>
+      <span class="badge badge-experto">jQuery</span>
+      <span class="badge badge-experto">Entity Framework</span>
+      <span class="badge badge-experto">Entity Framework Core</span>
     </div>
 
     <div class="stack-group">
-      <p class="stack-title text-warning">🟡 Medio</p>
-      <span class="badge bg-warning text-dark">Java</span>
-      <span class="badge bg-warning text-dark">Python</span>
-      <span class="badge bg-warning text-dark">Git / GitHub</span>
+      <p class="stack-title text-secondary">Medio</p>
+      <span class="badge badge-medio">Java</span>
+      <span class="badge badge-medio">Python</span>
+      <span class="badge badge-medio">Git / GitHub</span>
     </div>
 
     <div class="stack-group">
-      <p class="stack-title text-secondary">⚪ Básico</p>
-      <span class="badge bg-secondary">Node.js</span>
-      <span class="badge bg-secondary">React</span>
+      <p class="stack-title text-muted">Básico</p>
+      <span class="badge badge-basico">Node.js</span>
+      <span class="badge badge-basico">React</span>
     </div>
   </div>
 
@@ -137,7 +181,10 @@
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Marcos Hernández – Todos los derechos reservados.</p>
+    <p>
+      &copy; 2025 Marcos Hernández –
+      <a href="https://www.linkedin.com/in/marcoshernandezalvarez/" target="_blank">LinkedIn</a>
+    </p>
   </footer>
 </div>
 
