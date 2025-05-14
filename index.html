@@ -8,8 +8,11 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f8f9fa;
+      background: linear-gradient(to bottom, #e6f0ff, #ffffff), url('https://www.transparenttextures.com/patterns/cubes.png');
+      background-blend-mode: lighten;
+      background-repeat: repeat;
     }
+
     .section {
       background-color: #ffffff;
       border-radius: 1rem;
@@ -17,6 +20,7 @@
       margin-top: 2rem;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
+
     .section-title {
       font-size: 1.5rem;
       font-weight: 600;
@@ -25,18 +29,34 @@
       display: inline-block;
       padding-bottom: 0.25rem;
     }
+
     ul li {
       margin-bottom: 0.5rem;
     }
+
     .badge {
       font-size: 0.95rem;
       margin: 0.25rem;
     }
+
     footer {
       margin-top: 3rem;
       font-size: 0.9rem;
       color: #6c757d;
       text-align: center;
+    }
+
+    .stack-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .stack-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    a {
+      text-decoration: none;
     }
   </style>
 </head>
@@ -70,30 +90,48 @@
   <!-- Stack Tecnológico -->
   <div class="section">
     <h2 class="section-title">🛠️ Stack Tecnológico</h2>
-    <div>
-      <span class="badge bg-primary">.NET Framework 4.8</span>
-      <span class="badge bg-primary">.NET Core / .NET 8</span>
-      <span class="badge bg-secondary">Entity Framework</span>
-      <span class="badge bg-secondary">SQL Server</span>
-      <span class="badge bg-success">Java</span>
-      <span class="badge bg-success">Python (GCP)</span>
-      <span class="badge bg-warning text-dark">Node.js</span>
-      <span class="badge bg-warning text-dark">React</span>
-      <span class="badge bg-info text-dark">Bootstrap</span>
-      <span class="badge bg-info text-dark">jQuery</span>
-      <span class="badge bg-dark">Git / GitHub</span>
+
+    <div class="stack-group">
+      <p class="stack-title text-success">🟢 Experto</p>
+      <span class="badge bg-primary">C#</span>
+      <span class="badge bg-primary">VB.NET</span>
+      <span class="badge bg-primary">SQL</span>
+      <span class="badge bg-primary">JavaScript</span>
+      <span class="badge bg-primary">JSON</span>
+      <span class="badge bg-primary">Bootstrap</span>
+      <span class="badge bg-primary">jQuery</span>
+      <span class="badge bg-primary">Entity Framework</span>
+      <span class="badge bg-primary">Entity Framework Core</span>
+    </div>
+
+    <div class="stack-group">
+      <p class="stack-title text-warning">🟡 Medio</p>
+      <span class="badge bg-warning text-dark">Java</span>
+      <span class="badge bg-warning text-dark">Python</span>
+      <span class="badge bg-warning text-dark">Git / GitHub</span>
+    </div>
+
+    <div class="stack-group">
+      <p class="stack-title text-secondary">⚪ Básico</p>
+      <span class="badge bg-secondary">Node.js</span>
+      <span class="badge bg-secondary">React</span>
     </div>
   </div>
 
   <!-- Portafolio -->
   <div class="section">
     <h2 class="section-title">📁 Portafolio</h2>
-    <p>Algunos de mis proyectos destacados (puedes enlazarlos a GitHub o desplegarlos en Pages):</p>
     <ul>
-      <li><strong>Modernización de ERP Financiero:</strong> Migración desde .NET 4.8 a .NET 6, con mejora del rendimiento en un 40%.</li>
-      <li><strong>Sistema de control de caja (ASP.NET):</strong> Solución completa con subida de archivos, validaciones y generación de reportes en Excel.</li>
-      <li><strong>API bancaria en .NET 8:</strong> Seguridad OAuth2, logging con NLog, y documentación con Swagger.</li>
-      <li><strong>Proyecto personal full-stack:</strong> App de tareas con Node.js, Express, MongoDB y React.</li>
+      <li>
+        <strong>Sistema de Gestión de Comunas</strong> – 
+        <a href="https://github.com/marcoshernandezti/ProyectoComunas" target="_blank">ver repositorio</a><br />
+        Solución en .NET 8 con arquitectura en tres capas (Datos, API REST y Web MVC). Permite listar regiones y comunas de Chile, con funcionalidades para crear y modificar comunas. Utiliza Entity Framework Core y procedimientos almacenados.
+      </li>
+      <li>
+        <strong>Buscador con Paginación desde XML</strong> – 
+        <a href="https://github.com/marcoshernandezti/ProyectoPaginacion" target="_blank">ver repositorio</a><br />
+        Aplicación en .NET 8 (próxima a separar en capas) que consume datos desde un archivo XML. Implementa paginación, grilla de resultados y uso de Entity Framework Core. Planea incorporar GitHub Actions para automatizar despliegues.
+      </li>
     </ul>
   </div>
 
