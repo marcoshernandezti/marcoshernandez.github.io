@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Portafolio de Marcos Hernandez, Ingeniero en Informática con experiencia en .NET, Java y Python.">
-  <meta name="author" content="Marcos Hernandez">
+  <meta name="description" content="Portafolio de Marcos Hernández, Ingeniero en Informática con experiencia en .NET, Java y Python.">
+  <meta name="author" content="Marcos Hernández">
   <title>Marcos Hernández – Portafolio</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -25,21 +25,37 @@
     }
 
     .section-title {
-      font-size: 1.5rem;
+      font-size: 1.7rem;
       font-weight: 600;
       margin-bottom: 1rem;
-      border-bottom: 2px solid #0d6efd;
+      border-bottom: 3px solid #0d6efd;
       display: inline-block;
-      padding-bottom: 0.25rem;
+      padding-bottom: 0.4rem;
     }
 
     ul li {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
 
     .badge {
-      font-size: 0.95rem;
-      margin: 0.25rem;
+      font-size: 0.9rem;
+      padding: 0.5em 0.75em;
+      border-radius: 1rem;
+    }
+
+    .badge-experto {
+      background-color: #0d6efd;
+      color: white;
+    }
+
+    .badge-medio {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .badge-basico {
+      background-color: #dee2e6;
+      color: #212529;
     }
 
     footer {
@@ -62,7 +78,6 @@
       text-decoration: none;
     }
 
-    /* 🎯 Tipo máquina de escribir */
     .typewriter h1 {
       overflow: hidden;
       border-right: 0.15em solid #0d6efd;
@@ -84,24 +99,21 @@
       50% { border-color: #0d6efd }
     }
 
-    /* 🎨 Colores más suaves para los niveles */
-    .badge-experto {
-      background-color: #004085;
-      color: white;
-    }
-
-    .badge-medio {
-      background-color: #6c757d;
-      color: white;
-    }
-
-    .badge-basico {
-      background-color: #ced4da;
-      color: #212529;
-    }
-
     .stack-title::before {
       content: '• ';
+    }
+
+    .btn-linkedin {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+    }
+
+    @media (max-width: 576px) {
+      .typewriter h1 {
+        font-size: 1.4rem;
+      }
     }
   </style>
 </head>
@@ -114,11 +126,8 @@
       <h1 class="text-primary">👋 ¡Hola! Soy Marcos Hernández</h1>
     </div>
     <p><strong>Ingeniero en Informática</strong> con <strong>18 años de experiencia</strong> en desarrollo de software, especializado en backend, modernización de sistemas y despliegue en la nube.</p>
-
-    <p>Durante más de <strong>15 años trabajé con .NET Framework 4.8</strong>, y en los últimos <strong>3+ años he liderado migraciones exitosas a .NET Core</strong>, desde 3.1 hasta .NET 8. También he participado en proyectos con <strong>Java</strong> y <strong>Python (GCP)</strong>.</p>
-
+    <p>Durante más de <strong>15 años trabajé con .NET Framework 4.8</strong>, y en los últimos <strong>3+ años he liderado migraciones exitosas a .NET Core</strong> (de 3.1 a .NET 8). También he participado en proyectos con <strong>Java</strong> y <strong>Python (GCP)</strong>.</p>
     <p>Actualmente estoy aprendiendo <strong>Node.js</strong> y <strong>React</strong> en un proyecto personal, consolidando mi perfil full-stack.</p>
-
     <p>Me destaco por mi <strong>pensamiento analítico</strong>, orientación a la mejora continua y compromiso con soluciones eficientes y escalables.</p>
   </div>
 
@@ -172,34 +181,25 @@
       <li>
         <strong>Sistema de Gestión de Comunas</strong> – 
         <a href="https://github.com/marcoshernandezti/ProyectoComunas" target="_blank">ver repositorio</a><br />
-        Solución en .NET 8 con arquitectura en tres capas (Datos, API REST y Web MVC). Permite listar regiones y comunas de Chile, con funcionalidades para crear y modificar comunas. Utiliza Entity Framework Core y procedimientos almacenados.
+        Solución en .NET 8 con arquitectura en tres capas. Listado, creación y edición de comunas chilenas, usando Entity Framework Core y procedimientos almacenados.
       </li>
       <li>
         <strong>Buscador con Paginación desde XML</strong> – 
         <a href="https://github.com/marcoshernandezti/ProyectoPaginacion" target="_blank">ver repositorio</a><br />
-        Aplicación en .NET 8 (próxima a separar en capas) que consume datos desde un archivo XML. Implementa paginación, grilla de resultados y uso de Entity Framework Core. Planea incorporar GitHub Actions para automatizar despliegues.
+        Proyecto en .NET 8 con consumo de XML, paginación, y planes para separación de capas y automatización con GitHub Actions.
       </li>
     </ul>
   </div>
 
-  <!-- Sección de contacto con LinkedIn destacado -->
+  <!-- Contacto -->
   <div class="section text-center">
     <h2 class="section-title">📫 Contacto</h2>
-    <a href="https://www.linkedin.com/in/marcoshernandezalvarez/" target="_blank" class="btn btn-outline-primary btn-lg">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" style="width: 20px; margin-right: 8px;">
-      Visita mi perfil en LinkedIn
+    <a href="https://www.linkedin.com/in/marcoshernandezalvarez/" target="_blank" class="btn btn-outline-primary btn-lg btn-linkedin">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" style="width: 20px;">
+      LinkedIn – Marcos Hernández
     </a>
   </div>
 
   <!-- Footer -->
   <footer>
-    <p>
-      &copy; 2025 Marcos Hernández –
-      <a href="https://www.linkedin.com/in/marcoshernandezalvarez/" target="_blank">LinkedIn</a>
-    </p>
-  </footer>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <p>&copy; 2025 Marcos Hernández – <a href="https://www.linkedin.com/in/marcoshernandezalvarez/" target="_blank">LinkedIn</a></p>
