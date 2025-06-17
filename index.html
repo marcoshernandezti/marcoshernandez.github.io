@@ -8,12 +8,12 @@
   <title>Marcos Hernández – Portafolio</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #e6f0ff, #ffffff), url('https://www.transparenttextures.com/patterns/cubes.png');
-      background-blend-mode: lighten;
-      background-repeat: repeat;
+      font-family: 'Inter', sans-serif;
+      background: #f4f7fa;
+      color: #2c3e50;
     }
 
     .section {
@@ -21,16 +21,16 @@
       border-radius: 1rem;
       padding: 2rem;
       margin-top: 2rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
     }
 
     .section-title {
-      font-size: 1.7rem;
+      font-size: 1.8rem;
       font-weight: 600;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       border-bottom: 3px solid #0d6efd;
       display: inline-block;
-      padding-bottom: 0.4rem;
+      padding-bottom: 0.5rem;
     }
 
     ul li {
@@ -38,9 +38,10 @@
     }
 
     .badge {
-      font-size: 0.9rem;
-      padding: 0.5em 0.75em;
+      font-size: 0.95rem;
+      padding: 0.6em 1em;
       border-radius: 1rem;
+      margin: 0.2rem;
     }
 
     .badge-experto {
@@ -65,42 +66,26 @@
       text-align: center;
     }
 
-    .stack-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .stack-title {
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    a {
-      text-decoration: none;
-    }
-
     .typewriter h1 {
-      overflow: hidden;
-      border-right: 0.15em solid #0d6efd;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #0d6efd;
+      border-right: 3px solid;
       white-space: nowrap;
-      margin: 0 auto;
-      letter-spacing: 0.05em;
+      overflow: hidden;
+      width: 0;
       animation:
-        typing 3s steps(30, end),
+        typing 3s steps(40, end) forwards,
         blink-caret 0.75s step-end infinite;
     }
 
     @keyframes typing {
-      from { width: 0 }
       to { width: 100% }
     }
 
     @keyframes blink-caret {
       from, to { border-color: transparent }
-      50% { border-color: #0d6efd }
-    }
-
-    .stack-title::before {
-      content: '• ';
+      50% { border-color: #0d6efd; }
     }
 
     .btn-linkedin {
@@ -112,65 +97,57 @@
 
     @media (max-width: 576px) {
       .typewriter h1 {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
       }
     }
   </style>
 </head>
 <body>
 
-<div class="container">
+<div class="container py-4">
   <!-- Presentación -->
-  <div class="section">
+  <div class="section text-center">
     <div class="typewriter">
-      <h1 class="text-primary">👋 ¡Hola! Soy Marcos Hernández</h1>
+      <h1>👋 ¡Hola! Soy Marcos Hernández</h1>
     </div>
-    <p><strong>Ingeniero en Informática</strong> con <strong>18 años de experiencia</strong> en desarrollo de software, especializado en backend, modernización de sistemas y despliegue en la nube.</p>
-    <p>Durante más de <strong>15 años trabajé con .NET Framework 4.8</strong>, y en los últimos <strong>3+ años he liderado migraciones exitosas a .NET Core</strong> (de 3.1 a .NET 8). También he participado en proyectos con <strong>Java</strong> y <strong>Python (GCP)</strong>.</p>
-    <p>Actualmente estoy aprendiendo <strong>Node.js</strong> y <strong>React</strong> en un proyecto personal, consolidando mi perfil full-stack.</p>
-    <p>Me destaco por mi <strong>pensamiento analítico</strong>, orientación a la mejora continua y compromiso con soluciones eficientes y escalables.</p>
+    <p class="lead">Ingeniero en Informática con 18 años de experiencia en desarrollo de software, especializado en backend y modernización de sistemas.</p>
+    <p>Experto en .NET Framework/Core, con proyectos en Java, Python (GCP), y actualmente expandiendo habilidades hacia Node.js y React.</p>
   </div>
 
   <!-- Habilidades -->
   <div class="section">
     <h2 class="section-title">🧠 Habilidades</h2>
     <ul>
-      <li>Liderazgo técnico y mentoría a equipos de desarrollo</li>
-      <li>Migración de sistemas legados a arquitecturas modernas</li>
-      <li>Diseño de APIs RESTful y microservicios</li>
-      <li>Optimización de bases de datos y procedimientos almacenados</li>
-      <li>Integraciones con servicios cloud (GCP, Azure)</li>
+      <li>Liderazgo técnico y mentoría</li>
+      <li>Migración de sistemas legados</li>
+      <li>Diseño de APIs RESTful</li>
+      <li>Optimización de bases de datos</li>
+      <li>Integraciones cloud (GCP, Azure)</li>
     </ul>
   </div>
 
   <!-- Stack Tecnológico -->
   <div class="section">
     <h2 class="section-title">🛠️ Stack Tecnológico</h2>
-
-    <div class="stack-group">
-      <p class="stack-title text-primary">Experto</p>
+    <div>
+      <p><strong>Experto:</strong></p>
       <span class="badge badge-experto">C#</span>
       <span class="badge badge-experto">VB.NET</span>
-      <span class="badge badge-experto">SQL</span>      
+      <span class="badge badge-experto">SQL</span>
       <span class="badge badge-experto">Entity Framework</span>
-      <span class="badge badge-experto">Entity Framework Core</span>
     </div>
-
-    <div class="stack-group">
-      <p class="stack-title text-secondary">Medio</p>
+    <div class="mt-3">
+      <p><strong>Intermedio:</strong></p>
       <span class="badge badge-medio">JavaScript</span>
-      <span class="badge badge-medio">JSON</span>
+      <span class="badge badge-medio">Node.js</span>
       <span class="badge badge-medio">Bootstrap</span>
       <span class="badge badge-medio">jQuery</span>
-      <span class="badge badge-medio">Node.js</span>
     </div>
-
-    <div class="stack-group">
-      <p class="stack-title text-muted">Básico</p>
+    <div class="mt-3">
+      <p><strong>Básico:</strong></p>
       <span class="badge badge-basico">Java</span>
-      <span class="badge badge-basico">Python</span>      
+      <span class="badge badge-basico">Python</span>
       <span class="badge badge-basico">React</span>
-      <span class="badge badge-basico">Angular</span>
     </div>
   </div>
 
@@ -179,14 +156,14 @@
     <h2 class="section-title">📁 Portafolio</h2>
     <ul>
       <li>
-        <strong>Sistema de Gestión de Comunas</strong> – 
-        <a href="https://github.com/marcoshernandezti/ProyectoComunas" target="_blank">ver repositorio</a><br />
-        Solución en .NET 8 con arquitectura en tres capas. Listado, creación y edición de comunas chilenas, usando Entity Framework Core y procedimientos almacenados.
+        <strong>Sistema de Gestión de Comunas</strong> –
+        <a href="https://github.com/marcoshernandezti/ProyectoComunas" target="_blank">ver repositorio</a>
+        <br />.NET 8, 3 capas, EF Core y SP.
       </li>
       <li>
-        <strong>Buscador con Paginación desde XML</strong> – 
-        <a href="https://github.com/marcoshernandezti/ProyectoPaginacion" target="_blank">ver repositorio</a><br />
-        Proyecto en .NET 8 con consumo de XML, paginación, y planes para separación de capas y automatización con GitHub Actions.
+        <strong>Buscador desde XML</strong> –
+        <a href="https://github.com/marcoshernandezti/ProyectoPaginacion" target="_blank">ver repositorio</a>
+        <br />.NET 8 con paginación y GitHub Actions.
       </li>
     </ul>
   </div>
@@ -203,3 +180,8 @@
   <!-- Footer -->
   <footer>
     <p>&copy; 2025 Marcos Hernández – <a href="https://www.linkedin.com/in/marcoshernandezalvarez/" target="_blank">LinkedIn</a></p>
+  </footer>
+</div>
+
+</body>
+</html>
